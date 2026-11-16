@@ -1,0 +1,53 @@
+name: MintakaSchedule CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Architecture & Integrity Audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate Package Manifest JSON
+        run: |
+          echo "Validating root package.json..."
+          node -e "const pkg = JSON.parse(require('fs').readFileSync('package.json', 'utf8')); console.log('Loaded manifest:', pkg.name);"
+
+      - name: Validate Docker Compose Configuration
+        run: |
+          echo "Testing docker-compose.yml syntax..."
+          docker compose config
+
+      - name: Verify Environment Templates & File Structure
+        run: |
+          echo "Verifying essential directories and configuration..."
+          test -f .env.example || { echo "Missing .env.example"; exit 1; }
+          test -f docker-compose.yml || { echo "Missing docker-compose.yml"; exit 1; }
+          test -d apps || { echo "Missing apps directory"; exit 1; }
+          test -d packages || { echo "Missing packages directory"; exit 1; }
+
+      - name: Verify Brand Assets & Celestial Vectors
+        run: |
+          echo "Checking brand assets..."
+          test -f public/brand/mintaka-logo.svg || { echo "Missing mintaka-logo.svg"; exit 1; }
+          test -f public/brand/mintaka-banner.svg || { echo "Missing mintaka-banner.svg"; exit 1; }
+          grep -q "MINTAKA" public/brand/mintaka-logo.svg || { echo "Invalid logo content"; exit 1; }
+          echo "All brand vectors validated."

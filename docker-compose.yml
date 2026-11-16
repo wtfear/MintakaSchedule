@@ -1,0 +1,52 @@
+name: mintaka-schedule
+
+services:
+  mintaka-web:
+    image: node:20-alpine
+    container_name: mintaka-schedule-app
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DATABASE_URL=postgresql://${DB_USER:-mintaka_user}:${DB_PASSWORD:-mintaka_secure_password}@postgres:5432/${DB_NAME:-mintaka_schedule}
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET:-mintaka_super_secret_auth_token_12345}
+      - NEXTAUTH_URL=${NEXTAUTH_URL:-http://localhost:3000}
+      - CALENDSO_ENCRYPTION_KEY=${CALENDSO_ENCRYPTION_KEY:-mintaka_encryption_key_32_chars_12}
+    command: sh -c "yarn start || npm run start"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - mintaka-net
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: mintaka-schedule-db
+    restart: unless-stopped
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    environment:
+      POSTGRES_DB: ${DB_NAME:-mintaka_schedule}
+      POSTGRES_USER: ${DB_USER:-mintaka_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-mintaka_secure_password}
+    volumes:
+      - mintaka_pg_data:/var/lib/postgresql/data
+    networks:
+      - mintaka-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-mintaka_user} -d ${DB_NAME:-mintaka_schedule}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  mintaka-net:
+    driver: bridge
+
+volumes:
+  mintaka_pg_data:
