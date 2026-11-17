@@ -3,6 +3,7 @@
   "description": "MintakaSchedule: Autonomous Appointment Booking & Scheduling Engine by WTFear Agency",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "workspaces_disabled": [
     "apps/*",
     "apps/api/*",
