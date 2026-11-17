@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgMintaka" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050B18" />
+      <stop offset="50%" stop-color="#0C1A32" />
+      <stop offset="100%" stop-color="#040812" />
+    </linearGradient>
+    <linearGradient id="cyanBlueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22D3EE" />
+      <stop offset="50%" stop-color="#0284C7" />
+      <stop offset="100%" stop-color="#4F46E5" />
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#FCD34D" />
+    </linearGradient>
+    <filter id="orionAura" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="24" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bgMintaka)" />
+
+  <!-- Orion Belt Constellation lines -->
+  <g opacity="0.18" stroke="#22D3EE" stroke-width="1.5">
+    <circle cx="300" cy="220" r="6" fill="#F59E0B" />
+    <circle cx="450" cy="250" r="6" fill="#FFFFFF" />
+    <circle cx="600" cy="210" r="7" fill="#22D3EE" />
+    <circle cx="750" cy="250" r="6" fill="#FFFFFF" />
+    <circle cx="900" cy="220" r="6" fill="#F59E0B" />
+    <line x1="300" y1="220" x2="450" y2="250" />
+    <line x1="450" y1="250" x2="600" y2="210" />
+    <line x1="600" y1="210" x2="750" y2="250" />
+    <line x1="750" y1="250" x2="900" y2="220" />
+  </g>
+
+  <!-- Big Hero Star Aura -->
+  <g transform="translate(600, 210)">
+    <circle cx="0" cy="0" r="105" fill="url(#cyanBlueGrad)" opacity="0.32" filter="url(#orionAura)" />
+    <!-- Chrono Dial -->
+    <circle cx="0" cy="0" r="88" stroke="#22D3EE" stroke-width="2" fill="none" stroke-dasharray="10 8" opacity="0.6" />
+    <!-- 8-Point Geometric Ray -->
+    <polygon points="0,-105 24,-28 105,-20 32,24 68,96 0,38 -68,96 -32,24 -105,-20 -24,-28" fill="url(#cyanBlueGrad)" />
+    <!-- Inner Gold Star -->
+    <polygon points="0,-72 14,-20 72,0 14,20 0,72 -14,20 -72,0 -14,-20" fill="url(#amberGrad)" opacity="0.95" />
+    <!-- Core -->
+    <circle cx="0" cy="0" r="20" fill="#FFFFFF" />
+    <circle cx="0" cy="0" r="10" fill="#0284C7" />
+  </g>
+
+  <!-- Typography -->
+  <text x="600" y="380" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="60" font-weight="900" letter-spacing="3" fill="#FFFFFF">
+    MINTAKA<tspan fill="#22D3EE">SCHEDULE</tspan>
+  </text>
+  
+  <text x="600" y="425" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="700" letter-spacing="6" fill="#F59E0B">
+    AUTONOMOUS BOOKING &amp; SCHEDULING ENGINE
+  </text>
+
+  <text x="600" y="470" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="400" letter-spacing="2" fill="#94A3B8">
+    Calendar Sync • WhatsApp Confirmations • Timezone Intelligence • Prisma &amp; PostgreSQL
+  </text>
+
+  <!-- Feature Pills -->
+  <g transform="translate(600, 535)">
+    <g transform="translate(-330, 0)">
+      <rect x="-90" y="-18" width="180" height="36" rx="18" fill="#1E293B" stroke="#334155" stroke-width="1.5" />
+      <text x="0" y="5" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#E2E8F0">100% MIT Licensed</text>
+    </g>
+    <g transform="translate(-110, 0)">
+      <rect x="-90" y="-18" width="180" height="36" rx="18" fill="#1E293B" stroke="#22D3EE" stroke-width="1.5" />
+      <text x="0" y="5" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#22D3EE">Next.js &amp; tRPC</text>
+    </g>
+    <g transform="translate(110, 0)">
+      <rect x="-90" y="-18" width="180" height="36" rx="18" fill="#1E293B" stroke="#F59E0B" stroke-width="1.5" />
+      <text x="0" y="5" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#F59E0B">WhatsApp Integrated</text>
+    </g>
+    <g transform="translate(330, 0)">
+      <rect x="-90" y="-18" width="180" height="36" rx="18" fill="#1E293B" stroke="#334155" stroke-width="1.5" />
+      <text x="0" y="5" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#E2E8F0">Turnkey Docker</text>
+    </g>
+  </g>
+</svg>

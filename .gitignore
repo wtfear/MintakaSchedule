@@ -74,7 +74,9 @@ packages/prisma/zod/**/*.ts
 packages/prisma/enums
 
 # Builds
-dist
+# dist
+!dist
+!dist/**
 packages/app-store/types
 
 # Linting
